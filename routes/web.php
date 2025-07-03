@@ -7,17 +7,23 @@ use App\Http\Controllers\ProductController;
 
 use function Pest\Laravel\get;
 
+
+Route::get('/teste', [ProductController::class, 'index'])->name("teste");
+
+
 // [ok] read all products
 
-Route::get("/products", [ProductController::class, 'readAllProducts']);
+Route::get("/products", [ProductController::class, 'readAllProducts'])->name("products.read");
 
 // [ok] create products 
 
-Route::post("/products", [ProductController::class, 'createProduct']);
+Route::get("/products/create", [ProductController::class, 'createProduct'])->name("products.create");
+
+Route::post("/products/insert", [ProductController::class, 'insertProduct'])->name("products.insert");
 
 // [ok] read product by id
 
-Route::get("/products/{id}", [ProductController::class, 'readProductById']);
+Route::get("/products/{id}", [ProductController::class, 'readProductById'])->name("products.read");
 
 // [] update product
 
@@ -26,8 +32,6 @@ Route::get("/products/{id}", [ProductController::class, 'readProductById']);
 
 
 // [] delete product
-
-Route::get('/create', [ProductController::class, 'index']);
 
 Route::get('/', function () {
     return view('welcome');

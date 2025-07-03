@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostProductRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Http\Response;
@@ -16,7 +17,11 @@ class ProductController extends Controller
 
     public function index(){
 
-        return view('create');
+        $products = Product::paginate(10);
+
+        return view('teste.teste', [
+            'products' => $products
+        ]);
 
     }
 
@@ -34,23 +39,21 @@ class ProductController extends Controller
 
     // [ok] create products 
 
-    public function createProduct(Request $req){
+    public function createProduct(){
         
-        $prodReq = $req->validate(
-        [ 
-            'name' => 'required|string',
-            'price' => 'required|integer',
-            'quantity' => 'required|integer',
-        ],
-        [
-            'name.required' => 'campo "name" obrigatório',
-            'price.required' => 'campo "price" obrigatório',
-            'quantity.required' => 'campo "quantity" obrigatório',
-        ]);
+        return view("product.create-product");
 
-        $product = Product::create($prodReq);
+    }
 
-        return response()->json($product, 201);
+    public function insertProduct(PostProductRequest $req){
+
+        $product = Product::create($req->all());
+
+        return redirect()
+                ->route('teste')
+                ->with('success', 'produto inserido');
+
+        // return response()->json($product, 201);
 
     }
 
