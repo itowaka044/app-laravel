@@ -22,7 +22,7 @@ class ProductController extends Controller
 
 
 
-    // [] read all products
+    // [ok] read all products
 
     public function readAllProducts(){
 
@@ -54,7 +54,12 @@ class ProductController extends Controller
 
     }
 
-    // [] read product by id
+    // [ok] read product by id
+
+    public function readProductById($id)
+    {
+        return Product::findOrFail($id);
+    }
 
 
     // [] update product

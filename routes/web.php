@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProductController;
 
+use function Pest\Laravel\get;
+
 // [ok] read all products
 
 Route::get("/products", [ProductController::class, 'readAllProducts']);
@@ -13,9 +15,9 @@ Route::get("/products", [ProductController::class, 'readAllProducts']);
 
 Route::post("/products", [ProductController::class, 'createProduct']);
 
+// [ok] read product by id
 
-// [] read product by id
-
+Route::get("/products/{id}", [ProductController::class, 'readProductById']);
 
 // [] update product
 
