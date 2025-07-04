@@ -4,18 +4,6 @@
 
 @section('content')
 
-    @if($errors->any())
-
-        @foreach ($errors->all() as $err)
-            
-            <p>{{ $err }}</p>
-            <br>
-            
-        @endforeach
-
-    @endif
-
-
     <form method="POST" action="/products/insert">
 
         @csrf
@@ -30,7 +18,7 @@
         <input type="number" id="quantity" name="quantity" value='{{ old('quantity') }}' required>
         <br>
 
-        <button type="submit">Enviar</button>
+        <button style="border: 1px solid black; padding: 3px; margin-top:3px" type="submit">Cadastrar</button>
     </form>
 
 
