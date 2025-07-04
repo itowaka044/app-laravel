@@ -2,47 +2,51 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\IsAdmin;
 
 use App\Http\Controllers\ProductController;
 
 use function Pest\Laravel\get;
 
+Route::middleware('auth')->group(function (){
 
-Route::get('/index', [ProductController::class, 'index'])->name("index");
+    Route::get('/index', [ProductController::class, 'index'])->name("index");
 
-// [ok] create products 
+    // [ok] create products 
 
-Route::get("/products/create", [ProductController::class, 'createProduct'])->name("products.create");
+    Route::get("/products/create", [ProductController::class, 'createProduct'])->name("products.create");
 
-Route::post("/products/insert", [ProductController::class, 'insertProduct'])->name("products.insert");
+    Route::post("/products/insert", [ProductController::class, 'insertProduct'])->name("products.insert");
 
-// [ok] read all products
+    // [ok] read all products
 
-Route::get("/products", [ProductController::class, 'readAllProducts'])->name("products.read");
+    Route::get("/products", [ProductController::class, 'readAllProducts'])->name("products.read");
 
-// [ok] read product by id
+    // [ok] read product by id
 
-Route::get("/products/{id}", [ProductController::class, 'readProductById'])->name("products.read-id");
+    Route::get("/products/{id}", [ProductController::class, 'readProductById'])->name("products.read-id");
 
-// [ok] update product
+    // [ok] update product
 
-Route::get('/products/edit/{id}', [ProductController::class, 'editProduct'])->name("products.edit");
+    Route::get('/products/edit/{id}', [ProductController::class, 'editProduct'])->name("products.edit");
 
-Route::put('/products/edit/{id}', [ProductController::class, 'updateProduct'])->name("products.update");
+    Route::put('/products/edit/{id}', [ProductController::class, 'updateProduct'])->name("products.update");
 
-// [ok] update product (patch)
+    // [ok] update product (patch)
 
-Route::patch('/products/edit-price/{id}', [ProductController::class, 'updateProductPrice'])->name("products.edit-price");
+    Route::patch('/products/edit-price/{id}', [ProductController::class, 'updateProductPrice'])->name("products.edit-price");
 
-Route::patch('/products/edit-quantity/{id}', [ProductController::class, 'updateProductQuantity'])->name("products.edit-quantity");
+    Route::patch('/products/edit-quantity/{id}', [ProductController::class, 'updateProductQuantity'])->name("products.edit-quantity");
 
-Route::patch('/products/edit-name/{id}', [ProductController::class, 'updateProductName'])->name("products.edit-name");
+    Route::patch('/products/edit-name/{id}', [ProductController::class, 'updateProductName'])->name("products.edit-name");
 
-// [] delete product
+    // [ok] delete product
 
-Route::delete('/products/delete/{id}', [ProductController::class, 'deleteProduct'])->name("products.delete");
+    Route::delete('/products/delete/{id}', [ProductController::class, 'deleteProduct'])->name("products.delete")->middleware(IsAdmin::class);
 
-//_________________________________
+});
+
+
 
 Route::get('/', function () {
     return view('welcome');
