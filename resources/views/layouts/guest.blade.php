@@ -7,22 +7,19 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+        {{-- Você pode usar um link direto, garantindo que 'public/css/app.css' exista --}}
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        {{-- O JavaScript ainda pode ser processado pelo Vite, se desejar --}}
+        @vite(['resources/js/app.js'])
+    </head>
+    <body class="guest-body"> {{-- Nova classe para estilização do body --}}
+        <div class="guest-container"> {{-- Nova classe para o container principal --}}
+            {{-- Removi o div do logo que você tinha no seu login.blade.php, mas se ele existia aqui, você pode recriá-lo com suas próprias classes --}}
+            <div class="guest-card"> {{-- Nova classe para o card de conteúdo --}}
                 {{ $slot }}
             </div>
         </div>

@@ -8,13 +8,13 @@
 
         @csrf
 
-        <p>name</p>
+        <p>Nome:</p>
         <input type="text" id="name" name="name" value='{{ old('name') }}' required>
 
-        <p>price</p>
+        <p>Preço:</p>
         <input type="number" id="price" name="price" value='{{ old('price') }}' required>
 
-        <p>quantity</p>
+        <p>Quantidade:</p>
         <input type="number" id="quantity" name="quantity" value='{{ old('quantity') }}' required>
         <br>
 

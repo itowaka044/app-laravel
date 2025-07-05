@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -186,6 +187,13 @@ class ProductController extends Controller
 
     // /products/delete/{id}
     public function deleteProduct($id){
+
+        if(Gate::denies('is_admin')){
+
+            return redirect()
+            ->route('index')
+            ->with('error', 'You should not pass!!!');
+        }
 
         $product = Product::find($id);
 
